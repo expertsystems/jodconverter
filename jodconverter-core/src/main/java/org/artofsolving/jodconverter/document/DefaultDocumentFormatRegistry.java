@@ -168,6 +168,10 @@ public class DefaultDocumentFormatRegistry extends SimpleDocumentFormatRegistry 
         DocumentFormat bmp = new DocumentFormat("Bitmap Image File", "bmp", "image/bmp");
         bmp.setInputFamily(DocumentFamily.DRAWING);
         addFormat(bmp);
+
+        DocumentFormat tiff = new DocumentFormat("Tagged Image File", "tif", "image/tiff");
+        tiff.setInputFamily(DocumentFamily.DRAWING);
+        addFormat(tiff);
   	}
 
 }

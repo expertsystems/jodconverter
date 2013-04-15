@@ -21,8 +21,9 @@
     </license>
   </licenses>
   <scm>
-    <url>http://jodconverter.googlecode.com/svn/trunk/jodconverter-core</url>
-    <connection>scm:svn:https://jodconverter.googlecode.com/svn/trunk/jodconverter-core/</connection>
+    <connection>scm:git:git@github.com:expertsystems/jodconverter.git</connection>
+    <developerConnection>scm:git:git@github.com:expertsystems/jodconverter.git</developerConnection>
+    <url>https://github.com/expertsystems/jodconverter.git</url>
   </scm>
   <inceptionYear>2003</inceptionYear>
   <developers>

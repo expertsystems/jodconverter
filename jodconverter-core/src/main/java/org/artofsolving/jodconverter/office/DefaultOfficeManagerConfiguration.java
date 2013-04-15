@@ -13,10 +13,11 @@
 package org.artofsolving.jodconverter.office;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 
+import org.artofsolving.jodconverter.process.LinuxProcessManager;
 import org.artofsolving.jodconverter.process.ProcessManager;
 import org.artofsolving.jodconverter.process.PureJavaProcessManager;
-import org.artofsolving.jodconverter.process.LinuxProcessManager;
 import org.artofsolving.jodconverter.process.SigarProcessManager;
 import org.artofsolving.jodconverter.util.PlatformUtils;
 
@@ -195,12 +196,23 @@ public class DefaultOfficeManagerConfiguration {
         }
     }
 
-    private boolean isSigarAvailable() {
+    public static boolean isSigarAvailable() {
         try {
-            Class.forName("org.hyperic.sigar.Sigar", false, getClass().getClassLoader());
+            Class<?> sigarClass = Class.forName("org.hyperic.sigar.Sigar", false, 
+                DefaultOfficeManagerConfiguration.class.getClassLoader());
+            Object sigar = sigarClass.newInstance();
+            sigarClass.getMethod("getMem").invoke(sigar);
             return true;
-        } catch (ClassNotFoundException classNotFoundException) {
+        } catch (ClassNotFoundException e) {
             return false;
+        } catch (InvocationTargetException e) {
+            if (e.getTargetException() instanceof UnsatisfiedLinkError) {
+                return false;
+            } else {
+                throw new RuntimeException(e);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
 public class PooledOfficeManagerTest {
 
     private static final UnoUrl CONNECTION_MODE = UnoUrl.socket(2002);
-    private static final long RESTART_WAIT_TIME = 2 * 1000;
+    private static final long RESTART_WAIT_TIME = 10 * 1000;
 
     public void executeTask() throws Exception {
         PooledOfficeManager officeManager = new PooledOfficeManager(CONNECTION_MODE);

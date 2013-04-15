@@ -43,7 +43,7 @@ public class OfficeDocumentConverterFunctionalTest {
             		return !name.startsWith(".");
             	}
             });
-			for (File inputFile : files) {
+            for (File inputFile : files) {
                 String inputExtension = FilenameUtils.getExtension(inputFile.getName());
                 DocumentFormat inputFormat = formatRegistry.getFormatByExtension(inputExtension);
                 assertNotNull(inputFormat, "unknown input format: " + inputExtension);

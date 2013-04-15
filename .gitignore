@@ -5,3 +5,4 @@ target
 *.iws
 *.log
 rebel.xml
+test-output

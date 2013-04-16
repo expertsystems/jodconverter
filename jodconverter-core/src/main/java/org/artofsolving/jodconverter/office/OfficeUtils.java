@@ -85,6 +85,7 @@ public class OfficeUtils {
                 "/opt/openoffice.org3",
                 "/opt/libreoffice",
                 "/usr/lib/openoffice",
+                "/usr/lib/openoffice.org2.0",
                 "/usr/lib/libreoffice"
             );
         }

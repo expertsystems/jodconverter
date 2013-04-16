@@ -14,6 +14,7 @@ package org.artofsolving.jodconverter.office;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Logger;
 
 import org.artofsolving.jodconverter.process.LinuxProcessManager;
 import org.artofsolving.jodconverter.process.ProcessManager;
@@ -24,6 +25,8 @@ import org.artofsolving.jodconverter.util.PlatformUtils;
 public class DefaultOfficeManagerConfiguration {
 
     public static final long DEFAULT_RETRY_TIMEOUT = 120000L;
+
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     private File officeHome = OfficeUtils.getDefaultOfficeHome();
     private OfficeConnectionProtocol connectionProtocol = OfficeConnectionProtocol.SOCKET;
@@ -167,6 +170,9 @@ public class DefaultOfficeManagerConfiguration {
         if (!workDir.isDirectory()) {
             throw new IllegalStateException("workDir doesn't exist or is not a directory: " + workDir);
         }
+
+        logger.info("Using office home: " + officeHome);
+        logger.info("Using work dir: " + workDir);
 
         if (processManager == null) {
             processManager = findBestProcessManager();

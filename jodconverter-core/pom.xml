@@ -20,9 +20,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git@github.com:expertsystems/jodconverter.git/jodconverter-core</connection>
-    <developerConnection>scm:git:git@github.com:expertsystems/jodconverter.git/jodconverter-core</developerConnection>
-    <url>https://github.com/expertsystems/jodconverter/tree/master/jodconverter-core</url>
+    <connection>scm:git:git@github.com:expertsystems/jodconverter.git</connection>
+    <developerConnection>scm:git:git@github.com:expertsystems/jodconverter.git</developerConnection>
+    <url>https://github.com/expertsystems/jodconverter.git</url>
   </scm>
   <inceptionYear>2003</inceptionYear>
   <developers>

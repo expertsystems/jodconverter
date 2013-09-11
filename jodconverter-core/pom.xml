@@ -47,13 +47,13 @@
     <repository>
       <id>es-releases</id>
       <name>Expert Systems Release Repository</name>
-      <url>http://munin.exder.net/nexus/content/repositories/releases</url>
+      <url>http://exs-app01.dev.sth.basefarm.net:9001/nexus/content/repositories/releases</url>
       <layout>default</layout>
     </repository>
     <snapshotRepository>
       <id>es-snapshots</id>
       <name>Expert Systems Snapshot Repository</name>
-      <url>http://munin.exder.net/nexus/content/repositories/snapshots</url>
+      <url>http://exs-app01.dev.sth.basefarm.net:9001/nexus/content/repositories/snapshots</url>
       <layout>default</layout>
     </snapshotRepository>
   </distributionManagement>

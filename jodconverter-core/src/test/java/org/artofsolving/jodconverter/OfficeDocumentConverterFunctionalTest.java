@@ -12,9 +12,6 @@
 //
 package org.artofsolving.jodconverter;
 
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -23,15 +20,20 @@ import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 import org.artofsolving.jodconverter.document.DocumentFormat;
 import org.artofsolving.jodconverter.document.DocumentFormatRegistry;
-import org.artofsolving.jodconverter.office.OfficeManager;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
+import org.artofsolving.jodconverter.office.OfficeManager;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 @Test(groups="functional")
 public class OfficeDocumentConverterFunctionalTest {
 
     public void runAllPossibleConversions() throws IOException {
-        OfficeManager officeManager = new DefaultOfficeManagerConfiguration().buildOfficeManager();
+        DefaultOfficeManagerConfiguration config = new DefaultOfficeManagerConfiguration();
+        config.setPortNumber(2003);
+        OfficeManager officeManager = config.buildOfficeManager();
         OfficeDocumentConverter converter = new OfficeDocumentConverter(officeManager);
         DocumentFormatRegistry formatRegistry = converter.getFormatRegistry();
         

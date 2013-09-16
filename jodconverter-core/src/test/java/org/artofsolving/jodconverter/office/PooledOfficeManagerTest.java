@@ -39,6 +39,7 @@ public class PooledOfficeManagerTest {
     private static final long RESTART_WAIT_TIME = 10 * 1000;
 
     public void executeTask() throws Exception {
+      System.out.println(">>>> executeTask");
         PooledOfficeManager officeManager = new PooledOfficeManager(CONNECTION_MODE);
         ManagedOfficeProcess managedOfficeProcess = (ManagedOfficeProcess) ReflectionUtils.getPrivateField(officeManager, "managedOfficeProcess");
         OfficeProcess process = (OfficeProcess) ReflectionUtils.getPrivateField(managedOfficeProcess, "process");
@@ -59,6 +60,7 @@ public class PooledOfficeManagerTest {
     }
 
     public void restartAfterCrash() throws Exception {
+      System.out.println(">>>> restartAfterCrash");
         final PooledOfficeManager officeManager = new PooledOfficeManager(CONNECTION_MODE);
         ManagedOfficeProcess managedOfficeProcess = (ManagedOfficeProcess) ReflectionUtils.getPrivateField(officeManager, "managedOfficeProcess");
         OfficeProcess process = (OfficeProcess) ReflectionUtils.getPrivateField(managedOfficeProcess, "process");
@@ -101,6 +103,7 @@ public class PooledOfficeManagerTest {
     }
 
     public void restartAfterTaskTimeout() throws Exception {
+      System.out.println(">>>> restartAfterTaskTimeout");
         PooledOfficeManagerSettings configuration = new PooledOfficeManagerSettings(CONNECTION_MODE);
         configuration.setTaskExecutionTimeout(1500L);
         final PooledOfficeManager officeManager = new PooledOfficeManager(configuration);
@@ -137,6 +140,7 @@ public class PooledOfficeManagerTest {
     }
 
     public void restartWhenMaxTasksPerProcessReached() throws Exception {
+      System.out.println(">>>> restartWhenMaxTasksPerProcessReached");
         PooledOfficeManagerSettings configuration = new PooledOfficeManagerSettings(CONNECTION_MODE);
         configuration.setMaxTasksPerProcess(3);
         final PooledOfficeManager officeManager = new PooledOfficeManager(configuration);

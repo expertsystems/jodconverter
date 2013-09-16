@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 public class ExternalOfficeManagerTest {
 
     public void executeTask() throws Exception {
+      System.out.println(">>>> ExternalOfficeManagerTest.executeTask");
         UnoUrl unoUrl = UnoUrl.socket(2003);
         OfficeProcess officeProcess = new OfficeProcess(OfficeUtils.getDefaultOfficeHome(), unoUrl,
             null, null, new File(System.getProperty("java.io.tmpdir")), new PureJavaProcessManager());

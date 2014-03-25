@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 import org.artofsolving.jodconverter.process.ProcessManager;
 
-class ProcessPoolOfficeManager implements OfficeManager {
+public class ProcessPoolOfficeManager implements OfficeManager {
 
     private final BlockingQueue<PooledOfficeManager> pool;
     private final PooledOfficeManager[] pooledManagers;
@@ -107,4 +107,8 @@ class ProcessPoolOfficeManager implements OfficeManager {
 		return running;
 	}
 
+	public OfficeManager[] getPooledManagers() {
+	  return pooledManagers;
+	}
+	
 }

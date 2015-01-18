@@ -110,7 +110,11 @@ class ManagedOfficeProcess {
 
 	private void doStartProcessAndConnect() throws OfficeException {
 		try {
-			process.start();
+		  try {
+		    process.start();
+		  } catch (ProcessRunningException e) {
+		    // If already running - reuse existing
+		  }
 			new Retryable() {
 				protected void attempt() throws TemporaryException, Exception {
 					try {

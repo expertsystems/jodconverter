@@ -57,13 +57,13 @@ class OfficeProcess {
     public void start(boolean restart) throws IOException {
         ProcessQuery processQuery = new ProcessQuery("soffice.bin", unoUrl.getAcceptString());
         long existingPid = processManager.findPid(processQuery);
-    	if (!(existingPid == PID_NOT_FOUND || existingPid == PID_UNKNOWN)) {
-			throw new IllegalStateException(String.format("a process with acceptString '%s' is already running; pid %d",
-			        unoUrl.getAcceptString(), existingPid));
+        if (!(existingPid == PID_NOT_FOUND || existingPid == PID_UNKNOWN)) {
+            // Fall back to external office manager
+          throw new ProcessRunningException(unoUrl.getAcceptString(), existingPid);
         }
-    	if (!restart) {
-    	    prepareInstanceProfileDir();
-    	}
+      	if (!restart) {
+      	    prepareInstanceProfileDir();
+      	}
         List<String> command = new ArrayList<String>();
         File executable = OfficeUtils.getOfficeExecutable(officeHome);
         if (runAsArgs != null) {

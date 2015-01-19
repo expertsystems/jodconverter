@@ -114,6 +114,7 @@ class ManagedOfficeProcess {
 		    process.start();
 		  } catch (ProcessRunningException e) {
 		    // If already running - reuse existing
+		    logger.info("OpenOffice already running; will try to reconnect.");
 		  }
 			new Retryable() {
 				protected void attempt() throws TemporaryException, Exception {

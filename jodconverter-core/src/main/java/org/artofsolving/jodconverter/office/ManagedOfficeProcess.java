@@ -29,6 +29,8 @@ class ManagedOfficeProcess {
 	private final ManagedOfficeProcessSettings settings;
 
 	private final OfficeProcess process;
+  /** Was there an OpenOffice process already running, rather than us starting one? */
+  private boolean wasAlreadyRunning;
 	private final OfficeConnection connection;
 
 	private ExecutorService executor = Executors.newSingleThreadExecutor(new NamedThreadFactory("OfficeProcessThread"));
@@ -114,6 +116,7 @@ class ManagedOfficeProcess {
 		    process.start();
 		  } catch (ProcessRunningException e) {
 		    // If already running - reuse existing
+        wasAlreadyRunning = true;
 		    logger.info("OpenOffice already running; will try to reconnect.");
 		  }
 			new Retryable() {
@@ -143,35 +146,50 @@ class ManagedOfficeProcess {
 	}
 
 	private void doStopProcess() {
-		try {
-			XDesktop desktop = OfficeUtils.cast(XDesktop.class, connection.getService(OfficeUtils.SERVICE_DESKTOP));
-			desktop.terminate();
-		} catch (DisposedException disposedException) {
-			// expected
-		} catch (Exception exception) {
-			// in case we can't get hold of the desktop
-			doTerminateProcess();
-		}
-		doEnsureProcessExited();
+    if(wasAlreadyRunning) {
+      logger.info("not stopping process, since it was already running");
+    }
+    else {
+      try {
+        XDesktop desktop = OfficeUtils.cast(XDesktop.class, connection.getService(OfficeUtils.SERVICE_DESKTOP));
+        desktop.terminate();
+      } catch (DisposedException disposedException) {
+        // expected
+      } catch (Exception exception) {
+        // in case we can't get hold of the desktop
+        doTerminateProcess();
+      }
+      doEnsureProcessExited();
+    }
 	}
 
 	private void doEnsureProcessExited() throws OfficeException {
-		try {
-			int exitCode = process.getExitCode(settings.getRetryInterval(), settings.getRetryTimeout());
-			logger.info("process exited with code " + exitCode);
-		} catch (RetryTimeoutException retryTimeoutException) {
-			doTerminateProcess();
-		}
-		process.deleteProfileDir();
+    if(wasAlreadyRunning) {
+      logger.info("process not exited, since it was already running");
+    }
+    else {
+      try {
+        int exitCode = process.getExitCode(settings.getRetryInterval(), settings.getRetryTimeout());
+        logger.info("process exited with code " + exitCode);
+      } catch (RetryTimeoutException retryTimeoutException) {
+        doTerminateProcess();
+      }
+      process.deleteProfileDir();
+    }
 	}
 
 	private void doTerminateProcess() throws OfficeException {
-		try {
-			int exitCode = process.forciblyTerminate(settings.getRetryInterval(), settings.getRetryTimeout());
-			logger.info("process forcibly terminated with code " + exitCode);
-		} catch (Exception exception) {
-			throw new OfficeException("could not terminate process", exception);
-		}
+    if(wasAlreadyRunning) {
+      logger.info("process not forcibly terminated, since it was already running");
+    }
+    else {
+      try {
+        int exitCode = process.forciblyTerminate(settings.getRetryInterval(), settings.getRetryTimeout());
+        logger.info("process forcibly terminated with code " + exitCode);
+      } catch (Exception exception) {
+        throw new OfficeException("could not terminate process", exception);
+      }
+    }
 	}
 
 	boolean isConnected() {

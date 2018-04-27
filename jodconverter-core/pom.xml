@@ -4,7 +4,7 @@
 
   <groupId>org.artofsolving.jodconverter</groupId>
   <artifactId>jodconverter-core</artifactId>
-  <version>3.8-SNAPSHOT</version>
+  <version>3.8</version>
   <packaging>jar</packaging>
 
   <name>JODConverter - Core Library</name>
@@ -23,6 +23,7 @@
     <connection>scm:git:git@github.com:expertsystems/jodconverter.git</connection>
     <developerConnection>scm:git:git@github.com:expertsystems/jodconverter.git</developerConnection>
     <url>https://github.com/expertsystems/jodconverter.git</url>
+    <tag>jodconverter-core-3.8</tag>
   </scm>
   <inceptionYear>2003</inceptionYear>
   <developers>
